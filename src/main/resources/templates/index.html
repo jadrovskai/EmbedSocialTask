@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EmbedSocialTask</title>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+        td {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+<h2>Fill the form</h2>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+
+            <form th:method="GET" th:action="@{/index}">
+                <div>
+                    <label>Prioritize by text</label><br/>
+                    <select name="prioritize" class="form-control">
+                        <option th:value="1" >Yes</option>
+                        <option th:value="0" >No</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Order by rating</label><br/>
+                    <select name="highestFirst" class="form-control">
+                        <option th:value="1" >Highest First</option>
+                        <option th:value="0" >Lowest First</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Order by date</label><br/>
+                    <select name="newestFirst" class="form-control">
+                        <option th:value="1" >Newest First</option>
+                        <option th:value="0" >Oldest First</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Minimum rating</label><br/>
+                    <select name="minRating" class="form-control">
+                        <option th:value="5" >5</option>
+                        <option th:value="4" >4</option>
+                        <option th:value="3" >3</option>
+                        <option th:value="2" >2</option>
+                        <option th:value="1" >1</option>
+                    </select>
+                </div>
+
+
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<br/>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th> Review Text </th>
+            <th> Rating </th>
+            <th> Date </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review : ${reviews}">
+            <td><span th:text="${review.getReviewText()}"></td>
+            <td><span th:text="${review.getRating()}"></span></td>
+            <td><span th:text="${review.getReviewCreatedOnDate()}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
